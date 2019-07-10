@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+web/app-qua-web/static/jsdoc/
+web/app-qua-web/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.idea
