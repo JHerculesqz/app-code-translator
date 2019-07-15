@@ -8,3 +8,4 @@ yarn-error.log*
 *.idea
 java/core-parent/bu-lib/target/
 java/core-parent/app-qua/target/
+java/app-code-translator/target/
