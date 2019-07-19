@@ -6,6 +6,7 @@ import com.firelord.code_translator.translator.mysql2oracle.MySql2OracleExecutor
 import com.firelord.code_translator.view.vo.GetCalcCountOutVo;
 import com.firelord.code_translator.view.vo.ParseInVo;
 import com.firelord.code_translator.view.vo.ParseOutVo;
+import com.firelord.component.io.file.FileUtilsEx;
 import com.firelord.spring.component.rpc.http.vo.ReqVo;
 import com.firelord.spring.component.rpc.http.vo.RespVo;
 import org.springframework.stereotype.Service;
@@ -42,17 +43,18 @@ public class ViewService {
 
         //InVo
         ParseInVo oParseInVo = oReqVo.getReqBuVo(ParseInVo.class);
+        String strCodeSrc = FileUtilsEx.readAllText(oParseInVo.getCodeSrc());
 
         //Provider
         String strCodeDst = "";
         try {
             //TYPE_MYSQL_2_ORACLE
             if (oParseInVo.getType().equals(TYPE_MYSQL_2_ORACLE)) {
-                strCodeDst = MySql2OracleExecutor.execute(oParseInVo.getCodeSrc());
+                strCodeDst = MySql2OracleExecutor.execute(strCodeSrc);
             }
             //TYPE_CPP_2_JAVA
             else if (oParseInVo.getType().equals(TYPE_CPP_2_JAVA)) {
-                strCodeDst = Cpp2JavaExecutor.execute(oParseInVo.getCodeSrc());
+                strCodeDst = Cpp2JavaExecutor.execute(strCodeSrc);
             }
             //TYPE_TCL_2_JAVA
             else if (oParseInVo.getType().equals(TYPE_TCL_2_JAVA)){
@@ -63,6 +65,7 @@ public class ViewService {
                 //do nothing
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
             RespVo.genRespVo4Err("转换失败...", oRespVo);
             return oRespVo;
         }

@@ -33,9 +33,6 @@ public class TranslateCache {
 
     public void init(){
         classFileSetVo = new ClassFileSetVo();
-
-        ClassFileVo oClassFileVo = new ClassFileVo();
-        classFileSetVo.getClassFileVos().add(oClassFileVo);
     }
 
     //#endregion

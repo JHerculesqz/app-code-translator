@@ -19,20 +19,27 @@ public class ClassFileVo {
     @Getter
     private List<ImportVo> importVos = new ArrayList<>();
 
+    @Setter
+    @Getter
+    private String className;
+
+    @Setter
+    @Getter
+    private List<MethodVo> methodVos = new ArrayList<>();
+
     //#endregion
 
-    //#region addImport
+    //#region addImportCommon
 
     public void addImport(int iImportType, String strSentence) {
-        if (!isExists(iImportType)) {
+        if (!isExistsImport(iImportType)) {
             ImportVo oNew = new ImportVo();
             oNew.setType(iImportType);
             oNew.setSentence(strSentence);
             importVos.add(oNew);
         }
     }
-
-    private boolean isExists(int iImportType) {
+    private boolean isExistsImport(int iImportType) {
         for (ImportVo oImportVo : importVos) {
             if (oImportVo.getType() == iImportType) {
                 return true;
